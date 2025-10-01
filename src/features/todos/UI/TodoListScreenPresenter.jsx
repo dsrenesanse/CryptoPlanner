@@ -6,7 +6,7 @@ import { TodoContext } from './TodoContext';
  *
  * @param {Object} props - The properties passed to the component.
  * @param {React.ReactNode} props.children - The child components to render within the context provider.
- * @param {import('../../domain/TodoUseCase')} props.todoUseCase - The use case for todo operations.
+ * @param {import('../domain/TodoUseCase').TodoUseCase} props.todoUseCase - The use case for todo operations.
  * @returns {React.JSX.Element} The JSX element for the presenter.
  */
 export const TodoListScreenPresenter = ({ children, todoUseCase }) => {

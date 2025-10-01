@@ -1,6 +1,6 @@
 export class AuthenticateUseCase {
   /**
-   * @param {import('./AuthRepository').default} authRepository
+   * @param {import('./AuthRepository').AuthRepository} authRepository
    */
   constructor(authRepository) {
     this.authRepository = authRepository;

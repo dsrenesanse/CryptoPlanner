@@ -10,4 +10,7 @@ this is a crypto planner app showing the clean architecture implementation with 
 - Local authentication using biometrics
 - Drag and drop to reorder todos
 
-ios build uses bundler for building the app
+## Before run
+- npm install
+- cd ios, pod install
+- don't forget to choose dev team to sign iOS build

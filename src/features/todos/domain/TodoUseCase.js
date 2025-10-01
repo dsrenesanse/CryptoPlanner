@@ -1,18 +1,18 @@
 export class TodoUseCase {
   /**
-   * @param {import('./TodoRepository').default} todoRepository
+   * @param {import('./TodoRepository').TodoRepository} todoRepository
    * @param {() => Promise<boolean>} [callback] A callback that must return true to proceed with any operation.
    */
-  constructor(todoRepository, callback) {
+  constructor(todoRepository, authorize) {
     this.todoRepository = todoRepository;
-    this.callback = callback;
+    this.authorize = authorize;
   }
 
   /**
-   * @returns {Promise<import('./Todo').default[]>}
+   * @returns {Promise<import('./Todo').Todo[]>}
    */
   async getTodos({ shouldProceedCheck = true }) {
-    const shouldProceed = shouldProceedCheck ? await this.callback() : true;
+    const shouldProceed = shouldProceedCheck ? await this.authorize() : true;
     if (shouldProceed) {
       return await this.todoRepository.getTodos();
     }
@@ -29,10 +29,10 @@ export class TodoUseCase {
 
   /**
    * Adds a new todo after confirming with the callback.
-   * @param {object} todo
+   * @param {import('./Todo').Todo} todo
    */
   async addTodo(todo) {
-    const shouldProceed = await this.callback();
+    const shouldProceed = await this.authorize();
     if (shouldProceed) {
       await this.todoRepository.addTodo(todo);
     }
@@ -44,7 +44,7 @@ export class TodoUseCase {
    * @param {string} id
    */
   async switchTodo(id) {
-    const shouldProceed = await this.callback();
+    const shouldProceed = await this.authorize();
     if (shouldProceed) {
       await this.todoRepository.switchTodo(id);
     }
@@ -56,7 +56,7 @@ export class TodoUseCase {
    * @param {string} id
    */
   async deleteTodo(id) {
-    const shouldProceed = await this.callback();
+    const shouldProceed = await this.authorize();
     if (shouldProceed) {
       await this.todoRepository.deleteTodo(id);
     }
@@ -65,7 +65,7 @@ export class TodoUseCase {
 
   /**
    * Reorders the todos after confirming with the callback.
-   * @param {object[]} data
+   * @param {import('./Todo').Todo[]} data
    */
   async reorderTodos(data) {
     const todos = await this.getTodos({ shouldProceedCheck: false });
@@ -73,7 +73,7 @@ export class TodoUseCase {
     if (sameOrder) {
       return true;
     }
-    const shouldProceed = await this.callback();
+    const shouldProceed = await this.authorize();
     if (shouldProceed) {
       await this.todoRepository.reorderTodos(data);
     }
@@ -86,7 +86,7 @@ export class TodoUseCase {
    * @param {string} newText
    */
   async updateTodo(id, newText) {
-    const shouldProceed = await this.callback();
+    const shouldProceed = await this.authorize();
     if (shouldProceed) {
       await this.todoRepository.updateTodo(id, newText);
     }

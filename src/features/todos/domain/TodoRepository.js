@@ -3,14 +3,14 @@
  */
 export class TodoRepository {
   /**
-   * @returns {Promise<import('./Todo').default[]>}
+   * @returns {Promise<import('./Todo').Todo[]>}
    */
   async getTodos() {
     throw new Error('Not implemented');
   }
 
   /**
-   * @param {import('./Todo').default} todo
+   * @param {import('./Todo').Todo} todo
    * @returns {Promise<void>}
    */
   async addTodo(todo) {
@@ -34,7 +34,7 @@ export class TodoRepository {
   }
 
   /**
-   * @param {object[]} data
+   * @param {import('./Todo').Todo[]} data
    * @returns {Promise<void>}
    */
   async reorderTodos(data) {

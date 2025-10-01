@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Vibration } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -105,7 +105,6 @@ export const TodoListScreen = () => {
         keyExtractor={item => item.id}
         onDragEnd={({ data }) => handleReorder(data)}
         scrollEventThrottle={16}
-        onReorde
       />
       <View style={{ paddingBottom: insets.bottom, ...styles.inputContainer }}>
         <TextInput
